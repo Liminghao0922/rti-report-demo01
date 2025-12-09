@@ -7,10 +7,14 @@ SPDX-License-Identifier: MIT
   background: rgba(255, 255, 255, 0.95);
   border-radius: 8px;
   padding: 16px;
-  margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  position: relative;
+  z-index: 20;
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 280px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .filter-header {
@@ -26,8 +30,8 @@ SPDX-License-Identifier: MIT
 
 .filter-buttons {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  flex-wrap: wrap;
   margin-bottom: 12px;
 }
 
@@ -41,8 +45,9 @@ SPDX-License-Identifier: MIT
   font-size: 14px;
   font-weight: 500;
   transition: all 0.2s ease;
-  min-width: 100px;
+  width: 100%;
   white-space: nowrap;
+  text-align: center;
 }
 
 .filter-btn:hover:not(:disabled) {
@@ -66,7 +71,7 @@ SPDX-License-Identifier: MIT
 .filter-btn.clear-btn {
   border-color: #d13438;
   color: #d13438;
-  margin-left: auto;
+  margin-top: 8px;
 }
 
 .filter-btn.clear-btn:hover:not(:disabled) {
@@ -105,21 +110,36 @@ SPDX-License-Identifier: MIT
   }
 }
 
-/* 响应式设计 */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .filter-button-panel {
+    width: 250px;
+    top: 75px;
+    right: 10px;
+  }
+}
+
 @media (max-width: 768px) {
   .filter-button-panel {
-    padding: 12px;
-    margin-bottom: 12px;
+    position: absolute;
+    top: auto;
+    right: 10px;
+    left: 10px;
+    bottom: 20px;
+    width: auto;
+    max-height: 200px;
   }
 
   .filter-buttons {
     gap: 8px;
+    flex-direction: column;
   }
 
   .filter-btn {
     padding: 6px 12px;
     font-size: 13px;
-    min-width: 70px;
+    min-width: 100%;
+    width: 100%;
   }
 
   .filter-btn.clear-btn {
