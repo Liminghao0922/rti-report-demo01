@@ -39,6 +39,26 @@ jobs:
         continue-on-error: true
 
       - name: Build application
+        env:
+          POWERBI_REPORT_ID: ${{ secrets.POWERBI_REPORT_ID }}
+          POWERBI_EMBED_URL: ${{ secrets.POWERBI_EMBED_URL }}
+          POWERBI_TABLE_NAME: ${{ secrets.POWERBI_TABLE_NAME }}
+          POWERBI_TABLE_COLUMN_NAME: ${{ secrets.POWERBI_TABLE_COLUMN_NAME }}
+          POWERBI_VISUAL_ID: ${{ secrets.POWERBI_VISUAL_ID }}
+          MSAL_CONFIG_CLIENT_ID: ${{ secrets.MSAL_CONFIG_CLIENT_ID }}
+          MSAL_CONFIG_CLIENT_AUTHORITY: ${{ secrets.MSAL_CONFIG_CLIENT_AUTHORITY }}
+          MSAL_CONFIG_REDIRECT_URI: ${{ secrets.MSAL_CONFIG_REDIRECT_URI }}
+          MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI: ${{ secrets.MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI }}
+          SESSION_SERVICE_URL: ${{ secrets.SESSION_SERVICE_URL }}
+          USD_PATH: ${{ secrets.USD_PATH }}
+          USD_SAS_TOKEN: ${{ secrets.USD_SAS_TOKEN }}
+          USD_HOST_NAME: ${{ secrets.USD_HOST_NAME }}
+          USD_CONTAINER_NAME: ${{ secrets.USD_CONTAINER_NAME }}
+          POWERBI_REQUEST_SCOPE: ${{ secrets.POWERBI_REQUEST_SCOPE }}
+          EVENTHUB_REQUEST_SCOPE: ${{ secrets.EVENTHUB_REQUEST_SCOPE }}
+          EVENTHUB_RESOURCE_URL: ${{ secrets.EVENTHUB_RESOURCE_URL }}
+          EVENTHUB_NAME: ${{ secrets.EVENTHUB_NAME }}
+          EVENTHUB_GROUP_NAME: ${{ secrets.EVENTHUB_GROUP_NAME }}
         run: npm run build
 
       - name: Build And Deploy
