@@ -24,7 +24,8 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/store';
 import './AppStreamComponent.css';
-import { AppStreamer, StreamEvent } from '@nvidia/omniverse-webrtc-streaming-library';
+import { AppStreamer, StreamEvent, StreamType} from '@nvidia/omniverse-webrtc-streaming-library';
+
 import { setRemoteStream, setServer } from '../state/slice/appStreamSlice';
 import { setKitState } from '../state/slice/appStreamSlice';
 import { setURL, setLoadingState } from '../state/slice/usdStorageSlice';
@@ -143,26 +144,41 @@ const AppStreamComponent: React.FC = () => {
     }, [server]);
 
     const _connectLocalStream = () => {
+        // Read signaling port and media configuration from environment variables
+        const signalingPort = parseInt(import.meta.env.VITE_STREAMING_SIGNALING_PORT || process.env.STREAMING_SIGNALING_PORT || '49100');
+        const mediaServer = import.meta.env.VITE_STREAMING_MEDIA_SERVER || process.env.STREAMING_MEDIA_SERVER || server;
+        const mediaPortStr = import.meta.env.VITE_STREAMING_MEDIA_PORT || process.env.STREAMING_MEDIA_PORT;
+        const mediaPort = mediaPortStr ? parseInt(mediaPortStr) : undefined;
+
+        const streamConfig: any = {
+            videoElementId: 'remote-video',
+            audioElementId: 'remote-audio',
+            authenticate: true,
+            maxReconnects: 5,
+            signalingServer: server,
+            signalingPort: signalingPort,
+            mediaServer: mediaServer,
+            nativeTouchEvents: true,
+            width: 1920,
+            height: 1080,
+            fps: 60,
+            cursor: 'free',
+            autolaunch: true,
+            onUpdate: handleStreamUpdate,
+            onStart: handleStreamStart,
+            onCustomEvent: handleStreamCustomEvent,
+            onStop: handleStreamStop,
+            onTerminate: handleStreamTerminate,
+        };
+
+        // Only add mediaPort if it's specified
+        if (mediaPort !== undefined) {
+            streamConfig.mediaPort = mediaPort;
+        }
+
         AppStreamer.connect({
-            streamSource: 'direct',
-            streamConfig: {
-                videoElementId: 'remote-video',
-                audioElementId: 'remote-audio',
-                authenticate: false,
-                maxReconnects: 5,
-                server: server,
-                nativeTouchEvents: true,
-                width: 1920,
-                height: 1080,
-                fps: 60,
-                cursor: 'free',
-                autolaunch: true,
-                onUpdate: handleStreamUpdate,
-                onStart: handleStreamStart,
-                onCustomEvent: handleStreamCustomEvent,
-                onStop: handleStreamStop,
-                onTerminate: handleStreamTerminate,
-            }
+            streamSource: StreamType.DIRECT,
+            streamConfig: streamConfig
         })
             .then((result: StreamEvent) => {
                 console.info('AppStreamer Setup Success:', result);

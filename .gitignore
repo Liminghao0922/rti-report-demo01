@@ -35,3 +35,4 @@ pnpm-debug.log*
 # Sample data - should not be committed
 src/assets/sample_data/
 public/sample_data/
+package-lock.json

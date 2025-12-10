@@ -34,7 +34,7 @@
         "@azure/msal-react": "^2.0.19",
         "@azure/storage-blob": "^12.25.0",
         "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-        "@nvidia/omniverse-webrtc-streaming-library": "^3.2.0",
+        "@nvidia/omniverse-webrtc-streaming-library": "5.6.0",
         "@reduxjs/toolkit": "^2.2.7",
         "bootstrap": "^5.3.3",
         "dotenv": "latest",

@@ -39,8 +39,8 @@ interface PageLayoutProps {
 
 // Check if streaming is configured
 const isStreamingEnabled = () => {
-    const sessionUrl = import.meta.env.VITE_SESSION_SERVICE_URL || process.env.SESSION_SERVICE_URL;
-    return sessionUrl && sessionUrl !== '<ovestreamingurl>' && sessionUrl.trim() !== '';
+    const streamingServer = import.meta.env.VITE_STREAMING_SERVER || process.env.STREAMING_SERVER;
+    return streamingServer && streamingServer.trim() !== '';
 };
 
 // Check if EventHub is configured

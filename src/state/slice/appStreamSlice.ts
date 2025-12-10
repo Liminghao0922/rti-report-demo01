@@ -36,7 +36,7 @@ interface AppStreamState {
 }
 
 const initialState: AppStreamState = {
-    server: '',
+    server: import.meta.env.VITE_STREAMING_SERVER || process.env.STREAMING_SERVER || '',
     remoteStream: {
         signalingserver: '',
         signalingport: 0,

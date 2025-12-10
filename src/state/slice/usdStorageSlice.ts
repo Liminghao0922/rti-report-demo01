@@ -29,7 +29,7 @@ interface UsdStorageState {
 }
 
 const initialState: UsdStorageState = {
-    url: '',
+    url: process.env.USD_PATH || '',
     loadingState: 'idle',
     loadedUrl: '',
 };

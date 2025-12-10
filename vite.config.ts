@@ -59,7 +59,12 @@ export default ({ mode }) => {
             "process.env.EVENTHUB_NAME":JSON.stringify(env.EVENTHUB_NAME),
             "process.env.EVENTHUB_GROUP_NAME":JSON.stringify(env.EVENTHUB_GROUP_NAME),
             "process.env.MSAL_CONFIG_REDIRECT_URI":JSON.stringify(env.MSAL_CONFIG_REDIRECT_URI),
-            "process.env.MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI":JSON.stringify(env.MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI)
+            "process.env.MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI":JSON.stringify(env.MSAL_CONFIG_POST_LOGOUT_REDIRECT_URI),
+            // Streaming configuration
+            "process.env.STREAMING_SERVER": JSON.stringify(env.VITE_STREAMING_SERVER || env.STREAMING_SERVER),
+            "process.env.STREAMING_SIGNALING_PORT": JSON.stringify(env.VITE_STREAMING_SIGNALING_PORT || env.STREAMING_SIGNALING_PORT),
+            "process.env.STREAMING_MEDIA_SERVER": JSON.stringify(env.VITE_STREAMING_MEDIA_SERVER || env.STREAMING_MEDIA_SERVER),
+            "process.env.STREAMING_MEDIA_PORT": JSON.stringify(env.VITE_STREAMING_MEDIA_PORT || env.STREAMING_MEDIA_PORT)
         }
     });
 }
