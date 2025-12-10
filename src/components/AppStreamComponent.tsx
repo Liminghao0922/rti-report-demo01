@@ -24,7 +24,7 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../state/store';
 import './AppStreamComponent.css';
-import { AppStreamer, StreamEvent, StreamType} from '@nvidia/omniverse-webrtc-streaming-library';
+import { AppStreamer, StreamEvent, StreamType } from '@nvidia/omniverse-webrtc-streaming-library';
 
 import { setRemoteStream, setServer } from '../state/slice/appStreamSlice';
 import { setKitState } from '../state/slice/appStreamSlice';
@@ -198,16 +198,16 @@ const AppStreamComponent: React.FC = () => {
 
     const _connectOVASStream = () => {
         AppStreamer.connect({
-            streamSource: 'direct',
+            streamSource: StreamType.DIRECT,
             streamConfig: {
                 videoElementId: 'remote-video',
                 audioElementId: 'remote-audio',
-                signalingserver: remoteStream.signalingserver,
-                signalingport: remoteStream.signalingport,
-                mediaserver: remoteStream.mediaserver,
-                mediaport: remoteStream.mediaport,
+                signalingServer: remoteStream.signalingserver,
+                signalingPort: remoteStream.signalingport,
+                mediaServer: remoteStream.mediaserver,
+                mediaPort: remoteStream.mediaport,
                 accessToken: remoteStream.accessToken,
-                sessionid: remoteStream.sessionid,
+                sessionId: remoteStream.sessionid,
                 authenticate: false,
                 maxReconnects: 30,
                 connectivityTimeout: 120000,
@@ -216,7 +216,7 @@ const AppStreamComponent: React.FC = () => {
                 height: 1080,
                 fps: 60,
                 cursor: 'free',
-                autolaunch: true,
+                autoLaunch: true,
                 onUpdate: handleStreamUpdate,
                 onStart: handleStreamStart,
                 onCustomEvent: handleStreamCustomEvent,

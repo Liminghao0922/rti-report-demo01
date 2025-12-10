@@ -68,6 +68,13 @@ const EmbedPowerBIComponent: React.FC = () => {
     setPowerBIEmbededToken();
   }, []);
 
+  // Update Power BI slicer when selection changes
+  useEffect(() => {
+    if (!isBusy && window.report) {
+      setSlicer();
+    }
+  }, [assetIds, isBusy]);
+
 
   const handleSetSelection = (assetId: string) => {
     let updatedSelection;
@@ -80,6 +87,16 @@ const EmbedPowerBIComponent: React.FC = () => {
     dispatch(setSelection(updatedSelection));
   };
 
+  // Transform asset IDs to Power BI column values
+  const mapAssetIdsToPowerBIValues = (ids: string[]): string[] => {
+    return ids.map(id => {
+      // TODO: Add your specific transformation logic here
+      // Currently returning the ID as is. 
+      // Example: return id.split('/').pop() || id;
+      return id;
+    });
+  };
+
   const basicFilter: models.IBasicFilter = {
     $schema: process.env.POWERBI_BASIC_FILTER_SCHEMA,
     target: {
@@ -87,7 +104,7 @@ const EmbedPowerBIComponent: React.FC = () => {
       column: process.env.POWERBI_TABLE_COLUMN_NAME
     },
     operator: "In",
-    values: assetIds,
+    values: mapAssetIdsToPowerBIValues(assetIds),
     filterType: models.FilterType.Basic
   };
 
