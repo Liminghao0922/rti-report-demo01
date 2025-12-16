@@ -25,6 +25,7 @@ import usdStorageReducer from "./slice/usdStorageSlice";
 import selectionReducer from "./slice/selectionSlice";
 import serviceReducer from "./slice/serviceSlice";
 import statusReducer from "./slice/statusSlice";
+import timeControlReducer from "./slice/timeControlSlice";
 
 export const store = configureStore({
     reducer: {
@@ -33,6 +34,7 @@ export const store = configureStore({
         usdStorage: usdStorageReducer,
         selection: selectionReducer,
         status: statusReducer,
+        timeControl: timeControlReducer,
     },
 });
 

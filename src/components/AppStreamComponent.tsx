@@ -104,6 +104,29 @@ const AppStreamComponent: React.FC = () => {
         } else if (message.event_type === "openedStageResult") {
             dispatch(setLoadingState('idle'));
             dispatch(setLoadedURL(message.payload.url));
+            dispatch(setSelectionWithOrigin({ assetIds: [], origin: 'client' }));
+
+            // Request children of /World to make them pickable
+            const requestChildrenMessage = {
+                event_type: "getChildrenRequest",
+                payload: {
+                    prim_path: '/World',
+                    filters: ['USDGeom']
+                }
+            };
+            AppStreamer.sendMessage(JSON.stringify(requestChildrenMessage));
+        } else if (message.event_type === "getChildrenResponse") {
+            const children = message.payload.children;
+            if (Array.isArray(children)) {
+                const paths = children.map((child: any) => child.path);
+                const makePickableMessage = {
+                    event_type: "makePrimsPickable",
+                    payload: {
+                        paths: paths
+                    }
+                };
+                AppStreamer.sendMessage(JSON.stringify(makePickableMessage));
+            }
         } else if (message.event_type === "stageSelectionChanged") {
             if (!Array.isArray(message.payload.prims) || message.payload.prims.length === 0) {
                 console.log('Kit App selection empty.');
@@ -153,7 +176,8 @@ const AppStreamComponent: React.FC = () => {
         const streamConfig: any = {
             videoElementId: 'remote-video',
             audioElementId: 'remote-audio',
-            authenticate: true,
+            authenticate: false,
+            autoLaunch: true,
             maxReconnects: 5,
             signalingServer: server,
             signalingPort: signalingPort,
@@ -163,7 +187,6 @@ const AppStreamComponent: React.FC = () => {
             height: 1080,
             fps: 60,
             cursor: 'free',
-            autolaunch: true,
             onUpdate: handleStreamUpdate,
             onStart: handleStreamStart,
             onCustomEvent: handleStreamCustomEvent,

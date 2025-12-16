@@ -1,0 +1,283 @@
+.time-control-container {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    z-index: 1000;
+    width: 380px;
+}
+
+.time-control-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: move;
+    user-select: none;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.time-control-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.mode-switcher {
+    display: flex;
+    gap: 10px;
+}
+
+.mode-button {
+    padding: 8px 16px;
+    border: 1px solid #d0d0d0;
+    background: #f5f5f5;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.mode-button:hover {
+    background: #e8e8e8;
+}
+
+.mode-button.active {
+    background: #76b900;
+    color: white;
+    border-color: #76b900;
+}
+
+.time-control-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.current-time-display {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+/* Historical Mode Controls */
+.historical-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.date-picker-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.date-picker-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.date-picker-input {
+    padding: 8px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.time-range-group {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.time-input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.time-input-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.time-input {
+    padding: 8px 12px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.progress-bar-wrapper {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.progress-bar::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #76b900;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+}
+
+.progress-bar::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+}
+
+.progress-bar::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #76b900;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+.progress-bar-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Playback Controls */
+.playback-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.control-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.play-button {
+    background: #76b900;
+    color: white;
+}
+
+.play-button:hover {
+    background: #5d9100;
+}
+
+.play-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.pause-button {
+    background: #ff6b6b;
+    color: white;
+}
+
+.pause-button:hover {
+    background: #ee5a5a;
+}
+
+/* Realtime Mode */
+.realtime-info {
+    text-align: center;
+    padding: 20px;
+    background: #f0f8ff;
+    border-radius: 4px;
+    color: #555;
+}
+
+.realtime-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #76b900;
+    border-radius: 50%;
+    margin-right: 8px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* React Time Picker Customization */
+.time-picker-custom {
+    width: 100%;
+    z-index: 1001;
+}
+
+.time-picker-custom .react-time-picker__wrapper {
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    background: white;
+}
+
+.time-picker-custom .react-time-picker__inputGroup__input {
+    font-family: inherit;
+    color: #333;
+}
+
+.react-time-picker__clock {
+    display: none;
+}
+
+.react-time-picker__portal {
+    z-index: 2000;
+}

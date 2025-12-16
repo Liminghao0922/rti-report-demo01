@@ -32,6 +32,8 @@ import StatusComponent from "./components/StatusComponent";
 import EventHubStreamComponent from "./components/EventHubStreamComponent";
 import EmbedPowerBIComponent from "./components/EmbedPowerBIComponent";
 import FilterButtonPanel from "./components/FilterButtonPanel";
+import TimeControlComponent from "./components/TimeControlComponent";
+import TimeIntegrationComponent from "./components/TimeIntegrationComponent";
 
 interface PageLayoutProps {
     children: ReactNode;
@@ -59,6 +61,12 @@ export const PageLayout: React.FC<PageLayoutProps> = (props) => {
             {props.children}
             <br />
             <AuthenticatedTemplate>
+                {/* Time Control Component */}
+                <TimeControlComponent/>
+                
+                {/* Time Integration Component - handles syncing time to Power BI and Omniverse */}
+                <TimeIntegrationComponent/>
+                
                 {/* Show filter buttons when streaming is not enabled */}
                 {!streamingEnabled && <FilterButtonPanel/>}
                 
@@ -79,7 +87,9 @@ export const PageLayout: React.FC<PageLayoutProps> = (props) => {
                 {streamingEnabled && (
                     <>
                         <ServiceComponent/>
-                        <AppStreamComponent/>
+                        <div className="streaming-div">
+                            <AppStreamComponent/>
+                        </div>
                         <USDStorageComponent/>
                         <SelectionComponent/>
                     </>

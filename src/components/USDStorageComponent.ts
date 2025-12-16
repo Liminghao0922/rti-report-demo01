@@ -47,7 +47,7 @@ const USDStorageComponent: React.FC = () => {
             };
             AppStreamer.sendMessage(JSON.stringify(message));
         }
-    }, [url]);
+    }, [url, kitState]);
 
     return null;
 };
